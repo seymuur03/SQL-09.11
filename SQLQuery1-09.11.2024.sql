@@ -77,3 +77,126 @@ DELETE FROM Employee WHERE Salary = 700 AND Age >= 40
 
 -- Task 3 
 
+CREATE DATABASE Relations
+USE Relations
+
+--OneToOne
+CREATE TABLE Countries
+(
+Id int primary key,
+[Name] nvarchar(80) UNIQUE ,
+[Population] int 
+)
+
+CREATE TABLE Capitals
+(
+Id int primary key,
+[Name] nvarchar(80) UNIQUE ,
+CountryId int foreign key references Countries(Id)
+)
+
+--OneToMany
+CREATE TABLE Teams
+(
+Id int primary key,
+[Name] nvarchar(80) UNIQUE Not Null,
+CountOfPlayers int 
+)
+
+CREATE TABLE Players 
+(
+Id int primary key,
+[Name] nvarchar(80) Not Null,
+TeamId int foreign key references Teams(Id)
+)
+
+--ManyToMany
+CREATE TABLE BookReaders
+(
+Id int primary key,
+[Name] nvarchar(80) Not Null,
+)
+
+CREATE TABLE Books
+(
+Id int primary key,
+[Name] nvarchar(80) Not Null
+)
+ALTER TABLE Books ADD Genres nvarchar(80)
+ALTER TABLE Books ADD Authors nvarchar(80)
+
+CREATE TABLE ReadersBooks
+(
+Id int primary key,
+BooksReadersId int foreign key references BookReaders(Id),
+BookId int foreign key references Books(Id)
+)
+
+
+INSERT INTO Countries VALUES 
+(1,'Azerbaijan',11),
+(2,'Turkey',90),
+(3,'Russia',143),
+(4,'Pakistan',240);
+
+SELECT * FROM Countries
+
+UPDATE Countries SET Population = 230 WHERE Id = 4 
+DELETE FROM Countries WHERE Population=230
+
+INSERT INTO Capitals VALUES 
+(1,'Baku',1),
+(2,'Moscow',3),
+(3,'Ankara',2);
+
+SELECT * FROM Capitals
+
+INSERT INTO Teams VALUES
+(1,'Wolves',5),
+(2,'Spontan',6),
+(3,'WithoutWhy',4),
+(4,'Winners',5);
+
+SELECT * FROM Teams
+
+INSERT INTO Players VALUES
+(1,'Seymur',3),
+(2,'Rasim',3),
+(3,'Arif',3),
+(4,'Ilham',1),
+(5,'Yusif',2),
+(6,'Mahir',1),
+(7,'Lorem',4),
+(8,'Ipsum',4),
+(9,'Ronaldo',2);
+
+SELECT * FROM Players
+
+INSERT INTO BookReaders VALUES 
+(1,'Seymur'),
+(2,'Lorem'),
+(3,'Ipsum'),
+(4,'Filankes'),
+(5,'Filan');
+
+SELECT * FROM BookReaders
+
+INSERT INTO Books VALUES
+(1,'Lord of the Rings','Dram','Tolkien'),
+(2,'Hobbit','Komedi','Tolkien'),
+(3,'Harry Potter','Dram','Rowling');
+
+SELECT * FROM Books
+
+INSERT INTO ReadersBooks VALUES 
+(1,1,1),
+(2,1,3),
+(3,2,1),
+(4,2,2),
+(5,2,3),
+(6,3,3),
+(7,4,2),
+(8,4,3),
+(9,5,1);
+
+SELECT * FROM ReadersBooks

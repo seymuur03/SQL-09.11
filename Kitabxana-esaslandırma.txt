@@ -1,0 +1,17 @@
+Kitabxana üçün yaratdığım databasemdə 7 dənə table var.
+Readers-Oxuyucular 
+Details-Oxuyucuların məlumatları
+Genres-Kitabların janrları
+Authors-Kitabların müəllifləri
+Shelves-Kitabların olduğu rəflər (hər müəllifin kitabı üçün ayrıca rəf var)
+Books-Kitabları(janrları müəllifləri və aid olduqları rəflərlə birgə)özündə saxlayır
+ReadersBooks-Readers və Books arasında əlaqəni saxlayan tabledı
+İsReturned - kitab oxuyucu tərəfindən kitabxanaya geri qaytarılıb\qaytarılmadığını bildirir 
+
+Readers və Details arasında- OneToOne relation var . 1 oxuyucunun yalnızca 1 məlumatı olur details tablesında . 1 details tablesındakı sətirdə yalnızca 1 readers sətirinə aiddi.
+
+Books - Genres \ Authors \ Shelves - Bunlar arasında OneToMany relation var. 1kitabın 1 janrı\müəllifi\rəfi olur . amma 1 janrda çoxlu kitab,1 müəllifin çoxlu kitabı və 1 rəfdə müxtəlif kitablar ola bilər.
+
+Readers və Books arasında ManyToMany relation var .
+1 oxuyucu 1 neçə kitabı oxuya bilər və eynilə 1 kitabı 1 neçə oxuyucu oxuya bilər
+ 

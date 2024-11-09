@@ -200,3 +200,135 @@ INSERT INTO ReadersBooks VALUES
 (9,5,1);
 
 SELECT * FROM ReadersBooks
+
+
+--Task 4 
+
+CREATE DATABASE BOOKSTORE
+USE BOOKSTORE
+ALTER DATABASE BOOKSTORE MODIFY NAME = [Library]
+
+CREATE TABLE Readers 
+(
+Id int primary key identity,
+FullName nvarchar(100) Not Null
+)
+
+CREATE TABLE Details 
+(
+Id int primary key identity,
+Email nvarchar(100) Unique Not Null,
+PhoneNumber nvarchar(100) Unique Not NULL,
+Adress nvarchar(150) Not Null,
+ReaderId int foreign key references Readers(Id)
+)
+
+CREATE TABLE Genres 
+(
+Id int primary key identity,
+[Name] nvarchar(100) UNIQUE Not Null
+)
+
+CREATE TABLE Authors  
+(
+Id int primary key identity,
+FullName nvarchar(100) UNIQUE Not Null,
+Country nvarchar(100) Not Null
+)
+
+CREATE TABLE Shelves
+(
+Id int primary key identity,
+[Name] nvarchar(100) UNIQUE
+)
+
+CREATE TABLE Books
+(
+Id int primary key identity,
+[Name] nvarchar(100) Not Null,
+GenreId int foreign key references Genres(Id),
+AuthorId int foreign key references Authors(Id),
+ShelfId int foreign key references Shelves(Id)
+)
+
+CREATE TABLE ReadersBooks
+(
+Id int primary key identity,
+ReaderId int foreign key references Readers(Id),
+BookId int foreign key references Books(Id),
+Isreturned bit 
+)
+
+INSERT INTO Readers VALUES
+('Seymur Mammadov'),
+('Lorem Ipsumov'),
+('Ipsum Loremov'),
+('Filankes Filankesov'),
+('Any one')
+SELECT * FROM Readers
+
+INSERT INTO Details VALUES
+('seymur@gmail.com','+994558429775','R.Quliyev 28',1),
+('lorem@gmail.com','+994558862775','Mehmandarov 12',2),
+('ipsum@gmail.com','+994558862575','Ehmedli',3),
+('filankes@gmail.com','+994558759621','Hezi aslanov',4),
+('any@gmail.com','+994502654126','Koroglu',5);
+SELECT * FROM Details
+
+INSERT INTO Genres VALUES
+('Horror'),
+('Dram'),
+('Romance'),
+('Fantasy'),
+('Mystery'),
+('Paranormal');
+INSERT INTO Genres VALUES
+('Fiction')
+SELECT * FROM Genres
+
+INSERT INTO Authors VALUES
+('William Shakespeare','England'),
+('Stephen King','Portland'),
+('Fyodor Dostoevsky','Russia'),
+('Stefan Zweig','Austria');
+SELECT * FROM Authors
+DELETE FROM Authors WHERE ID = 2 
+INSERT INTO Authors VALUES
+('Stephen King','America')
+
+INSERT INTO Shelves VALUES
+('A'),
+('B'),
+('C'),
+('D');
+SELECT * FROM Shelves
+
+INSERT INTO Books VALUES
+('Amok',7,4,1),
+('The Royal Game',2,4,1),
+('The World of Yesterday',3,4,1),
+('Hamlet',1,1,2),
+('Romeo and Juliet',3,1,2),
+('Crime and Punishment',4,3,3),
+('Demons',6,3,3),
+('it',5,5,4),
+('The Shining',1,5,4);
+
+SELECT * FROM Books
+
+INSERT INTO ReadersBooks VALUES 
+(1,1,1),
+(1,5,1),
+(1,9,0),
+(2,3,0),
+(3,4,1),
+(3,1,1),
+(4,8,0),
+(5,2,1),
+(5,5,0);
+
+SELECT * FROM ReadersBooks
+
+
+
+
